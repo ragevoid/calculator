@@ -59,7 +59,6 @@ body{
 }
 
 .calculator{
-	width: 300px;
 	background: linear-gradient(135deg, #353433, #919191);
 	box-shadow: 0 10px 28px #393736;
 	border-radius: 25px;
@@ -67,29 +66,27 @@ body{
 }
 
 .screen {
-	height: 140px;
+	height: 70px;
 	background-color: whitesmoke;
 	border-radius: 25px 25px 0 0 ;
 	box-shadow: 0 5px 5px #353433 ;
+}
+.screenText{
+	justify-content: center;
+	text-align: start;
+	padding: 30px;
+	font-family: 'Share Tech', sans-serif;
+	font-size: 20px;
 
 }
 
 .buttons{
-	height: 280px;
-	display: flex;
-	padding: 10px;
-	justify-content: space-between;
-}
-.numbers{
-display: grid;
-grid-template-columns: 65px 65px 65px;
-grid-template-rows: 70px 70px 70px 70px;
-}
-
-.operators{
 	display: grid;
-	grid-template-columns: 70px;
-	grid-template-rows: 56px 56px 56px 56px ;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 15px;
+	width: 100%;
+	flex-wrap: wrap;
 }
 
 button{
@@ -98,13 +95,15 @@ button{
 	border: none;
 	border-radius: 15px;
 	font-size: 20px;
+	padding: 20px;
 }
-.numbers>button:hover{
+
+.number:hover{
 	background-color: rgb(179, 179, 204, 0.2);
 	cursor: pointer;
 }
 
-.operators>button:hover{
+.operator:hover{
 	background-color: rgba(27, 149, 147, 0.689);
 	cursor: pointer;
 
