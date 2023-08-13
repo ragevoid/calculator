@@ -6,13 +6,27 @@ let result = '';
 const screen = document.getElementById('screenText');
 
 // FUNCTION TO UPDATE THE SCREEN
-function screenUpdate() {
+  function screenUpdate() {
   if (previousNumber !== "" && currentNumber === "") {
-    screen.textContent = `${previousNumber}`;
+    screen.textContent = formatNumber(previousNumber);
   } else if (currentNumber !== '') {
-    screen.textContent = `${currentNumber}`;
+    screen.textContent = formatNumber(currentNumber);
   } else {
     screen.textContent = "";
+  }
+}
+
+// FUNCTION TO FORMAT NUMBERS AFTER UPDATE SCREEN
+function formatNumber(number) {
+  const num = parseFloat(number);
+  if (Number.isNaN(num)) {
+    return "";
+  }
+
+  if (Number.isInteger(num)) {
+    return num.toLocaleString('en-US', { maximumFractionDigits: 0, maximumSignificantDigits: 9 });
+  } else {
+    return num.toLocaleString('en-US', { maximumFractionDigits: 3 });
   }
 }
 
