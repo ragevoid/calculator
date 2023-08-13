@@ -71,7 +71,6 @@ function handleOperatorClick(op) {
     currentNumber = '';
   }
   operator = op;
-
   screenUpdate();
 }
 
@@ -107,7 +106,13 @@ document.getElementById('allClear').addEventListener('click', () => {
 
 // FUNCION QUE MANEJA EL CLICK DE LIMPIAR
 document.getElementById('clear').addEventListener('click', () => {
-  currentNumber = '';
+  if(currentNumber !== ""){
+    currentNumber = '';
+  }else {
+    previousNumber =''
+    operator = '';
+  }
+ 
   screenUpdate();
 });
 
