@@ -8,9 +8,9 @@ const screen = document.getElementById('screenText');
 // FUNCION QUE ACTUALIZA LA PANTALLA
 function screenUpdate() {
   if (previousNumber !== "" && currentNumber =="") {
-    screen.textContent = `p${previousNumber}`;
+    screen.textContent = `${previousNumber}`;
   } else if (currentNumber !== '') {
-    screen.textContent = `c${currentNumber}`;
+    screen.textContent = `${currentNumber}`;
   }else{    screen.textContent ="";
   } 
 }
@@ -39,9 +39,6 @@ function operate(currentNumber, previousNumber, operator) {
       }
       break;
   }
-  console.log("previous",previousNumber)
-  console.log("current",currentNumber)
-  console.log("result",result)
 }
 
 // FUNCION QUE CONCATENA LOS NUMEROS
@@ -69,7 +66,7 @@ function handleOperatorClick(op) {
     operate(currentNumber, previousNumber, operator);
     previousNumber = result;
     currentNumber = '';
-  }else{
+  }else if(currentNumber !== "" && previousNumber ==""){
     previousNumber = currentNumber;
     currentNumber = '';
   }
@@ -77,12 +74,6 @@ function handleOperatorClick(op) {
 
   screenUpdate();
 }
-
-
-
-
-
-
 
 
 // FUNCION QUE MANEJA EL CLICK DEL IGUAL
@@ -122,8 +113,15 @@ document.getElementById('clear').addEventListener('click', () => {
 
 // FUNCION QUE MANEJA EL CAMBIO DE SIGNO
 document.getElementById('change').addEventListener('click', () => {
-  if (currentNumber !== '') {
-    currentNumber = (parseFloat(currentNumber) * -1).toString();
-    screenUpdate();
+  if (currentNumber !== '' && previousNumber =="") {
+    previousNumber = currentNumber;
+    currentNumber = '';
+    previousNumber = (parseFloat(previousNumber) * -1).toString()  
+  } else if(previousNumber !== "" && currentNumber == ""){
+    previousNumber = (parseFloat(previousNumber) * -1).toString()  
   }
+  console.log("previous",previousNumber)
+  console.log("current",currentNumber)
+  console.log("result",result)
+  screenUpdate();
 });
