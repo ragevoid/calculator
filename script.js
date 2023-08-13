@@ -79,8 +79,12 @@ function handleOperatorClick(op) {
   screenUpdate();
 }
 
+
 // LISTEN FOR EQUALS BUTTON CLICK
-document.getElementById('equals').addEventListener('click', () => {
+document.getElementById('equals').addEventListener('click', handleEqualCLick);
+
+//FUNCTION THAT HANDLES THE EQUAL BUTTON CLICK
+function handleEqualCLick(){
   if (currentNumber !== '' && previousNumber !== '') {
     operate(currentNumber, previousNumber, operator);
     previousNumber = result;
@@ -88,7 +92,7 @@ document.getElementById('equals').addEventListener('click', () => {
     operator = '';
     screenUpdate();
   }
-});
+};
 
 // LISTEN FOR DOT BUTTON CLICK
 document.getElementById('dot').addEventListener('click', () => {
@@ -133,8 +137,19 @@ document.getElementById('change').addEventListener('click', () => {
   } else if (previousNumber !== "" && currentNumber === "") {
     previousNumber = (parseFloat(previousNumber) * -1).toString();
   }
-  console.log("previous", previousNumber);
-  console.log("current", currentNumber);
-  console.log("result", result);
   screenUpdate();
 });
+
+//EVENT LISTENER OF THE PORCENTAGE BUTTON
+document.getElementById('prct').addEventListener('click',porcentage)
+
+//FUNTION THAT MAKES THE PORCENTAGE
+function porcentage(){
+  if(previousNumber === 'Error: Impossible'){
+    allClear()
+  }
+  handleEqualCLick()
+    previousNumber = (previousNumber/100).toString();
+    screenUpdate()
+}
+
