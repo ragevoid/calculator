@@ -5,19 +5,18 @@ let operator = '';
 let result = '';
 const screen = document.getElementById('screenText');
 
-// FUNCION QUE ACTUALIZA LA PANTALLA
+// FUNCTION TO UPDATE THE SCREEN
 function screenUpdate() {
-  if (previousNumber !== "" && currentNumber =="") {
-    screen.textContent = `${previousNumber}`;
+  if (previousNumber !== "" && currentNumber === "") {
+    screen.textContent = `p${previousNumber}`;
   } else if (currentNumber !== '') {
-    screen.textContent = `${currentNumber}`;
-  }else{    screen.textContent ="";
-  } 
+    screen.textContent = `c${currentNumber}`;
+  } else {
+    screen.textContent = "";
+  }
 }
 
-
-
-// FUNCION QUE CALCULA LAS OPERACIONES MATEMATICAS BASICAS
+// FUNCTION TO PERFORM BASIC MATHEMATICAL OPERATIONS
 function operate(currentNumber, previousNumber, operator) {
   const num1 = parseFloat(previousNumber);
   const num2 = parseFloat(currentNumber);
@@ -41,32 +40,38 @@ function operate(currentNumber, previousNumber, operator) {
   }
 }
 
-// FUNCION QUE CONCATENA LOS NUMEROS
+// FUNCTION TO HANDLE NUMBER BUTTON CLICK
 function handleNumberClick(number) {
+  if(previousNumber === 'Error: Impossible'){
+    allClear()
+  }
   currentNumber += number;
   screenUpdate();
 }
 
-// FUNCION QUE ESCUCHA EL CLICK EN LOS NUMEROS
+// LISTEN FOR CLICK ON NUMBER BUTTONS
 const numbers = document.getElementsByClassName('number');
 for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener('click', () => handleNumberClick(numbers[i].textContent));
 }
 
-// FUNCION QUE ESCUCHA EL CLICK EN LOS OPERADORES
+// LISTEN FOR CLICK ON OPERATOR BUTTONS
 const operators = document.getElementsByClassName('operator');
-
 for (const operator of operators) {
   operator.addEventListener('click', () => handleOperatorClick(operator.id));
 }
 
-// FUNCION QUE MANEJA LOS OPERADORES
+// FUNCTION TO HANDLE OPERATOR BUTTON CLICK
 function handleOperatorClick(op) {
+  if(previousNumber === 'Error: Impossible'){
+    allClear()
+  }
+
   if (currentNumber !== '' && previousNumber !== '') {
     operate(currentNumber, previousNumber, operator);
     previousNumber = result;
     currentNumber = '';
-  }else if(currentNumber !== "" && previousNumber ==""){
+  } else if (currentNumber !== "" && previousNumber === "") {
     previousNumber = currentNumber;
     currentNumber = '';
   }
@@ -74,8 +79,7 @@ function handleOperatorClick(op) {
   screenUpdate();
 }
 
-
-// FUNCION QUE MANEJA EL CLICK DEL IGUAL
+// LISTEN FOR EQUALS BUTTON CLICK
 document.getElementById('equals').addEventListener('click', () => {
   if (currentNumber !== '' && previousNumber !== '') {
     operate(currentNumber, previousNumber, operator);
@@ -86,8 +90,7 @@ document.getElementById('equals').addEventListener('click', () => {
   }
 });
 
-
-// FUNCION QUE MANEJA EL CLICK DEL PUNTO
+// LISTEN FOR DOT BUTTON CLICK
 document.getElementById('dot').addEventListener('click', () => {
   if (!currentNumber.includes('.')) {
     currentNumber += '.';
@@ -95,38 +98,43 @@ document.getElementById('dot').addEventListener('click', () => {
   }
 });
 
-// FUNCION QUE MANEJA EL CLICK DE LIMPIAR TODO
-document.getElementById('allClear').addEventListener('click', () => {
+// FUNCTION THAT CLEARS THE DATA
+function allClear() {
   currentNumber = '';
   previousNumber = '';
   operator = '';
   result = '';
   screenUpdate();
-});
+}
 
-// FUNCION QUE MANEJA EL CLICK DE LIMPIAR
+// LISTEN FOR ALL CLEAR BUTTON CLICK
+document.getElementById('allClear').addEventListener('click', allClear);
+
+// LISTEN FOR CLEAR BUTTON CLICK
 document.getElementById('clear').addEventListener('click', () => {
-  if(currentNumber !== ""){
+  if (currentNumber !== "") {
     currentNumber = '';
-  }else {
-    previousNumber =''
+  } else {
+    previousNumber = '';
     operator = '';
   }
- 
   screenUpdate();
 });
 
-// FUNCION QUE MANEJA EL CAMBIO DE SIGNO
+// LISTEN FOR CHANGE SIGN BUTTON CLICK
 document.getElementById('change').addEventListener('click', () => {
-  if (currentNumber !== '' && previousNumber =="") {
+    if(previousNumber === 'Error: Impossible'){
+    allClear()
+  }
+  if (currentNumber !== '' && previousNumber === "") {
     previousNumber = currentNumber;
     currentNumber = '';
-    previousNumber = (parseFloat(previousNumber) * -1).toString()  
-  } else if(previousNumber !== "" && currentNumber == ""){
-    previousNumber = (parseFloat(previousNumber) * -1).toString()  
+    previousNumber = (parseFloat(previousNumber) * -1).toString();
+  } else if (previousNumber !== "" && currentNumber === "") {
+    previousNumber = (parseFloat(previousNumber) * -1).toString();
   }
-  console.log("previous",previousNumber)
-  console.log("current",currentNumber)
-  console.log("result",result)
+  console.log("previous", previousNumber);
+  console.log("current", currentNumber);
+  console.log("result", result);
   screenUpdate();
 });
