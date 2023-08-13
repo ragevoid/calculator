@@ -8,9 +8,9 @@ const screen = document.getElementById('screenText');
 // FUNCTION TO UPDATE THE SCREEN
 function screenUpdate() {
   if (previousNumber !== "" && currentNumber === "") {
-    screen.textContent = `p${previousNumber}`;
+    screen.textContent = `${previousNumber}`;
   } else if (currentNumber !== '') {
-    screen.textContent = `c${currentNumber}`;
+    screen.textContent = `${currentNumber}`;
   } else {
     screen.textContent = "";
   }

@@ -107,5 +107,10 @@ button{
 .operator:hover, .special:hover{
 	background-color: rgba(27, 149, 147, 0.689);
 	cursor: pointer;
+}
+
+#allClear:hover{
+	cursor: pointer;
+	background-color: rgba(220, 69, 55, 0.689);
 
 }
